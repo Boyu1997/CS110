@@ -79,7 +79,7 @@ print max_height(r)
 # plot
 lst_avg_cmp = []
 lst_max_height = []
-for i in range(500, 10000, 500):
+for i in range(500, 10001, 500):
     lst_ith_avg_cmp = []
     lst_ith_max_height = []
     for j in range(50):
@@ -92,7 +92,9 @@ for i in range(500, 10000, 500):
     lst_max_height.append(np.mean(lst_ith_max_height))
 
 plt.subplot(223)
-plt.plot(lst_avg_cmp, label="average depth")
-plt.plot(lst_max_height, label="maximum depth")
+plt.plot([x for x in range(500, 10001, 500)], lst_avg_cmp, label="average depth")
+plt.plot([x for x in range(500, 10001, 500)], lst_max_height, label="maximum depth")
+plt.xlabel("length")
+plt.xlabel("depth")
 plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 plt.show()
