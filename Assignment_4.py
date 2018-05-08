@@ -2,8 +2,12 @@ class LCS():
     def __init__(self, list_1, list_2):
         self.list_1 = list_1
         self.list_2 = list_2
+        len_1 = len(self.list_1)
+        len_2 = len(self.list_2)
 
-    def lenLCS(self, i, j):
+    def lenLCS(self):
+        i = self.len_1
+        j = self.len_2
         self.lenTable = [["NA" for _ in range(j)] for _ in range(i)]
         self.lenCS(i, j)
         return self.lenTable[i-1][j-1]

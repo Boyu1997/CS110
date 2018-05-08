@@ -16,28 +16,29 @@ def max_profit(lst):
 
     print profit_lst
 
-def max_profit_rec(lst, my=False, lib=[]):
+def max_profit_rec(lst, start, end, my=False, lib=dict()):
     if my is False:
         my = True
     else:
         my = False
-    if len(lst) is 2:
+    if end-start is 1:
         if my:
-            return max(lst[0], lst[1])
+            return max(lst[start], lst[end])
         else:
-            return min(lst[0], lst[1])
+            return min(lst[start], lst[end])
+    elif start^end in lib.keys():
+            return lib[start^end]
     else:
         if my:
-            p1 = max_profit_rec(lst[0:-1], my) + lst[-1]
-            p2 = max_profit_rec(lst[1:], my) + lst[0]
-            return max(p1, p2)
+            p1 = max_profit_rec(lst, start, end-1, my, lib) + lst[end]
+            p2 = max_profit_rec(lst, start+1, end, my, lib) + lst[start]
+            lib[start^end] = max(p1, p2)
+            return lib[start^end]
         else:
-            p1 = max_profit_rec(lst[0:-1], my)
-            p2 = max_profit_rec(lst[1:], my)
-            return max(p1, p2)
+            p1 = max_profit_rec(lst, start, end-1, my, lib)
+            p2 = max_profit_rec(lst, start+1, end, my, lib)
+            lib[start^end] = max(p1, p2)
+            return lib[start^end]
 
-
-
-max_profit([2, 10, 1, 5])
-
-print max_profit_rec([2, 10, 1, 5])
+lst = [2, 10, 1, 5]
+print max_profit_rec(lst, 0, len(lst)-1)
